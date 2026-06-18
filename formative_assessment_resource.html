@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>56 Examples of Formative Assessment — D295 Resource</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap');
+
+  :root {
+    --ink: #1a1a2e;
+    --bg: #f7f5f0;
+    --card: #ffffff;
+    --accent: #2e6b9e;
+    --accent-soft: #dceeff;
+    --green: #2d7a4f;
+    --green-soft: #d6f0e2;
+    --amber: #b45309;
+    --amber-soft: #fef3c7;
+    --purple: #6b3fa0;
+    --purple-soft: #ede9f7;
+    --muted: #6b7280;
+    --border: #e5e2db;
+    --tag-bg: #eef2f7;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.65;
+    font-size: 15px;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--ink);
+    color: #fff;
+    padding: 3rem 2rem 2.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 70% 0%, rgba(46,107,158,0.35) 0%, transparent 60%);
+  }
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #93c5fd;
+    margin-bottom: 0.75rem;
+    position: relative;
+  }
+  header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    line-height: 1.15;
+    margin-bottom: 1rem;
+    position: relative;
+  }
+  header h1 em { font-style: italic; color: #93c5fd; }
+  .header-sub {
+    color: #cbd5e1;
+    max-width: 580px;
+    margin: 0 auto 1.5rem;
+    font-size: 0.95rem;
+    position: relative;
+  }
+  .attribution {
+    display: inline-block;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 6px;
+    padding: 0.4rem 1rem;
+    font-size: 0.8rem;
+    color: #cbd5e1;
+    position: relative;
+  }
+
+  /* DEFINITION BOX */
+  .definition-bar {
+    background: var(--accent);
+    color: #fff;
+    padding: 1.25rem 2rem;
+    text-align: center;
+  }
+  .definition-bar strong { display: block; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.75; margin-bottom: 0.35rem; }
+  .definition-bar p { max-width: 700px; margin: 0 auto; font-size: 0.95rem; }
+
+  /* LAYOUT */
+  main { max-width: 1100px; margin: 0 auto; padding: 2.5rem 1.5rem; }
+
+  /* FILTER BAR */
+  .filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    align-items: center;
+  }
+  .filter-label { font-size: 0.8rem; color: var(--muted); font-weight: 500; margin-right: 0.25rem; }
+  .filter-btn {
+    padding: 0.3rem 0.85rem;
+    border-radius: 100px;
+    border: 1.5px solid var(--border);
+    background: var(--card);
+    font-size: 0.8rem;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    color: var(--ink);
+    transition: all 0.15s;
+  }
+  .filter-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .filter-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+  /* SEARCH */
+  .search-wrap {
+    margin-bottom: 2rem;
+  }
+  .search-wrap input {
+    width: 100%;
+    padding: 0.7rem 1rem;
+    border-radius: 8px;
+    border: 1.5px solid var(--border);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    background: var(--card);
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .search-wrap input:focus { border-color: var(--accent); }
+
+  /* SECTION HEADERS */
+  .section-head {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 2.5rem 0 1.25rem;
+  }
+  .section-head h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.4rem;
+    color: var(--ink);
+  }
+  .section-pill {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.65rem;
+    border-radius: 100px;
+  }
+  .pill-green { background: var(--green-soft); color: var(--green); }
+  .pill-blue { background: var(--accent-soft); color: var(--accent); }
+  .pill-amber { background: var(--amber-soft); color: var(--amber); }
+  .pill-purple { background: var(--purple-soft); color: var(--purple); }
+
+  /* CARD GRID */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+
+  .card {
+    background: var(--card);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 1.25rem 1.25rem 1rem;
+    transition: box-shadow 0.15s, transform 0.15s;
+    cursor: default;
+    position: relative;
+  }
+  .card:hover {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+    transform: translateY(-2px);
+  }
+  .card-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: var(--muted);
+    margin-bottom: 0.35rem;
+    letter-spacing: 0.06em;
+  }
+  .card h3 {
+    font-size: 0.97rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+  .card p {
+    font-size: 0.85rem;
+    color: #444;
+    line-height: 1.55;
+  }
+  .card-tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 500;
+    padding: 0.18rem 0.55rem;
+    border-radius: 4px;
+    margin-top: 0.7rem;
+    background: var(--tag-bg);
+    color: var(--muted);
+  }
+  .card-tag.digital { background: var(--accent-soft); color: var(--accent); }
+  .card.hidden { display: none; }
+
+  /* DIGITAL TOOLS SPOTLIGHT */
+  .tools-section {
+    background: var(--ink);
+    color: #fff;
+    border-radius: 14px;
+    padding: 2rem 2rem 1.75rem;
+    margin: 3rem 0 1rem;
+  }
+  .tools-section h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.5rem;
+    margin-bottom: 0.35rem;
+  }
+  .tools-section .sub {
+    color: #94a3b8;
+    font-size: 0.88rem;
+    margin-bottom: 1.5rem;
+  }
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem;
+  }
+  .tool-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 9px;
+    padding: 1.1rem;
+    transition: background 0.15s;
+  }
+  .tool-card:hover { background: rgba(255,255,255,0.11); }
+  .tool-name { font-weight: 600; font-size: 0.95rem; margin-bottom: 0.3rem; }
+  .tool-url { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: #93c5fd; margin-bottom: 0.5rem; }
+  .tool-desc { font-size: 0.82rem; color: #cbd5e1; line-height: 1.5; }
+  .tool-status {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    margin-top: 0.6rem;
+  }
+  .status-active { background: rgba(45,122,79,0.4); color: #86efac; }
+  .status-note { background: rgba(180,83,9,0.4); color: #fcd34d; }
+
+  /* USAGE GUIDE */
+  .usage-section {
+    background: var(--green-soft);
+    border: 1.5px solid #a7f3d0;
+    border-radius: 12px;
+    padding: 1.75rem 2rem;
+    margin: 3rem 0;
+  }
+  .usage-section h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.3rem;
+    color: var(--green);
+    margin-bottom: 1rem;
+  }
+  .usage-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
+  .usage-item { font-size: 0.88rem; }
+  .usage-item strong { display: block; color: var(--green); margin-bottom: 0.2rem; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 2rem 1rem 3rem;
+    font-size: 0.8rem;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+    margin-top: 3rem;
+  }
+  footer a { color: var(--accent); text-decoration: none; }
+
+  /* COUNT BADGE */
+  .count-badge {
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.25rem 0.7rem;
+    border-radius: 100px;
+    margin-left: auto;
+  }
+
+  @media (max-width: 600px) {
+    header { padding: 2rem 1rem 2rem; }
+    main { padding: 1.5rem 1rem; }
+    .tools-section { padding: 1.5rem 1rem; }
+    .usage-section { padding: 1.25rem 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">D295 Learning Resource &nbsp;·&nbsp; Formative Assessment</div>
+  <h1>56 Examples of<br><em>Formative Assessment</em></h1>
+  <p class="header-sub">Practical strategies teachers can use in any educational setting — from analog classics to current digital tools — to inform instruction and give meaningful feedback.</p>
+  <span class="attribution">Originally curated by David Wees, New Visions for Public Schools &nbsp;·&nbsp; Updated for D295 2025–26</span>
+</header>
+
+<div class="definition-bar">
+  <strong>Definition</strong>
+  <p>A formative assessment is a tool teachers use to give feedback to students and/or guide their instruction. It is <em>not</em> included in a student grade, nor should it be used to judge a teacher's performance — those would be summative assessments.</p>
+</div>
+
+<main>
+
+  <!-- SEARCH + FILTER -->
+  <div class="search-wrap">
+    <input type="text" id="searchInput" placeholder="Search strategies (e.g., exit slip, peer, digital…)" oninput="filterCards()">
+  </div>
+  <div class="filter-bar">
+    <span class="filter-label">Filter:</span>
+    <button class="filter-btn active" onclick="setFilter('all', this)">All 56</button>
+    <button class="filter-btn" onclick="setFilter('writing', this)">Writing</button>
+    <button class="filter-btn" onclick="setFilter('verbal', this)">Verbal/Discussion</button>
+    <button class="filter-btn" onclick="setFilter('visual', this)">Visual/Creative</button>
+    <button class="filter-btn" onclick="setFilter('digital', this)">⚡ Digital</button>
+    <button class="filter-btn" onclick="setFilter('peer', this)">Peer-Based</button>
+    <button class="filter-btn" onclick="setFilter('quick', this)">Quick Checks</button>
+    <span class="count-badge" id="countBadge">56 showing</span>
+  </div>
+
+  <!-- SECTION 1: WRITING-BASED -->
+  <div class="section-head">
+    <h2>Writing-Based Strategies</h2>
+    <span class="section-pill pill-amber">Reflect &amp; Articulate</span>
+  </div>
+  <div class="card-grid" id="cardGrid">
+
+    <div class="card" data-cat="writing" data-num="01">
+      <div class="card-num">01</div>
+      <h3>3× Summarization</h3>
+      <p>Ask students to write three summaries of the same concept: 10–15 words, 30–50 words, and 75–100 words. Different lengths demand different levels of precision and understanding.</p>
+      <span class="card-tag">writing</span>
+    </div>
+
+    <div class="card" data-cat="writing" data-num="02">
+      <div class="card-num">02</div>
+      <h3>Write It Down</h3>
+      <p>Students write an explanation of what they understand. Read these to inform your instruction; write comments or discuss them to give individual feedback.</p>
+      <span class="card-tag">writing</span>
+    </div>
+
+    <div class="card" data-cat="writing" data-num="03">
+      <div class="card-num">03</div>
+      <h3>Exit Slip</h3>
+      <p>Hand out a short quiz or 2–3 questions; students submit them as they leave. A classic snapshot of whole-class understanding in under five minutes.</p>
+      <span class="card-tag">writing</span>
+    </div>
+
+    <div class="card" data-cat="writing" data-num="04">
+      <div class="card-num">04</div>
+      <h3>3-2-1 Reflection</h3>
+      <p>Students write 3 big ideas from the lesson, 2 insights or reflective comments, and 1 remaining question. Great as an exit slip alternative.</p>
+      <span class="card-tag">writing</span>
+    </div>
+
+    <div class="card" data-cat="writing" data-num="05">
+      <div class="card-num">05</div>
+      <h3>Two Roses and a Thorn</h3>
+      <p>Students name two things they valued about a chapter or lesson, and one thing they didn't like or still have a question about. Works as a wrap-up or exit ticket.</p>
+      <span class="card-tag">writing</span>
+    </div>
+
+    <div class="card" data-cat="writing" data-num="06">
+      <div class="card-num">06</div>
+      <h3>Postcard</h3>
+      <p>Students write a postcard as one historical figure to another, describing a historical event. Forces concise, perspective-taking writing.</p>
+      <span class="card-tag">writing</span>
+    </div>
+
+    <div class="card" data-cat="writing" data-num="07">
+      <div class="card-num">07</div>
+      <h3>3 Things</h3>
+      <p>List 3 things a fellow student might misunderstand about the topic — or 3 things you want to know more about. Quick and thought-provoking.</p>
+      <span class="card-tag">writing</span>
+    </div>
+
+    <div class="card" data-cat="writing" data-num="08">
+      <div class="card-num">08</div>
+      <h3>Comments on Student Work</h3>
+      <p>Write descriptive comments on student work helping them see how to improve, or what they've done effectively. Prioritize comments over grades for formative purposes.</p>
+      <span class="card-tag">writing</span>
+    </div>
+
+    <div class="card" data-cat="writing" data-num="09">
+      <div class="card-num">09</div>
+      <h3>Self-Assessment</h3>
+      <p>After finishing a writing assignment, students evaluate themselves using the same rubric you use. Then discuss their self-evaluation in conference.</p>
+      <span class="card-tag">writing</span>
+    </div>
+
+    <div class="card" data-cat="writing" data-num="10">
+      <div class="card-num">10</div>
+      <h3>Answer the Essential Question</h3>
+      <p>Can students answer the lesson's essential question — verbally or in writing? A direct gauge of whether learning goals were met.</p>
+      <span class="card-tag">writing</span>
+    </div>
+
+    <div class="card" data-cat="writing" data-num="11">
+      <div class="card-num">11</div>
+      <h3>Make Predictions</h3>
+      <p>Students predict an experiment or demo outcome and explain their reasoning. After the demo, discuss why predictions were right or wrong. Base grades on final conclusions, not predictions.</p>
+      <span class="card-tag">writing</span>
+    </div>
+
+    <div class="card" data-cat="writing" data-num="12">
+      <div class="card-num">12</div>
+      <h3>Metacognition Table</h3>
+      <p>At the end of class, students complete a table: What did we do? Why? What did I learn? How can I apply it? What questions remain?</p>
+      <span class="card-tag">writing</span>
+    </div>
+
+  </div>
+
+  <!-- SECTION 2: QUICK CHECKS -->
+  <div class="section-head">
+    <h2>Quick-Check Strategies</h2>
+    <span class="section-pill pill-green">Real-Time Pulse</span>
+  </div>
+  <div class="card-grid">
+
+    <div class="card" data-cat="quick" data-num="13">
+      <div class="card-num">13</div>
+      <h3>Thumbs Up / Middle / Down</h3>
+      <p>Ask if students understand. Thumbs up = got it; sideways = unsure; down = lost. Ancient Rome's version used a closed fist vs. open hand.</p>
+      <span class="card-tag">quick</span>
+    </div>
+
+    <div class="card" data-cat="quick" data-num="14">
+      <div class="card-num">14</div>
+      <h3>Fingers Up (1–5)</h3>
+      <p>1 = I need a lot of help; 5 = I really get this. Students hold up fingers so you can scan the room at a glance.</p>
+      <span class="card-tag">quick</span>
+    </div>
+
+    <div class="card" data-cat="quick" data-num="15">
+      <div class="card-num">15</div>
+      <h3>Quick Nod</h3>
+      <p>Students nod yes or no to signal understanding. Can also be done digitally with Poll Everywhere or a Google Form for anonymity.</p>
+      <span class="card-tag">quick</span>
+    </div>
+
+    <div class="card" data-cat="quick" data-num="16">
+      <div class="card-num">16</div>
+      <h3>Red / Green Card</h3>
+      <p>Students hold an index card (red on one side, green on the other). Green = following along; red = need clarification. Far more efficient than raised hands.</p>
+      <span class="card-tag">quick</span>
+    </div>
+
+    <div class="card" data-cat="quick" data-num="17">
+      <div class="card-num">17</div>
+      <h3>Traffic Lights</h3>
+      <p>Green = I know this; Yellow = partly; Red = I don't know this. Use before, during, and after a topic with highlighters, colored cups, or laminated rings.</p>
+      <span class="card-tag">quick</span>
+    </div>
+
+    <div class="card" data-cat="quick" data-num="18">
+      <div class="card-num">18</div>
+      <h3>Watch Body Language</h3>
+      <p>Pay careful attention to students' nonverbal cues — confusion, disengagement, and "aha" moments often show before students raise their hands.</p>
+      <span class="card-tag">quick</span>
+    </div>
+
+    <div class="card" data-cat="quick" data-num="19">
+      <div class="card-num">19</div>
+      <h3>Raised Hands</h3>
+      <p>When asking questions, note who raises their hand (give sufficient wait time). Track patterns over time to identify who may be disengaged or struggling.</p>
+      <span class="card-tag">quick</span>
+    </div>
+
+    <div class="card" data-cat="quick" data-num="20">
+      <div class="card-num">20</div>
+      <h3>Cold-Calling</h3>
+      <p>Use a procedure (e.g., popsicle sticks, random selector) to call on all students equitably — including those who might not otherwise volunteer.</p>
+      <span class="card-tag">quick</span>
+    </div>
+
+    <div class="card" data-cat="quick" data-num="21">
+      <div class="card-num">21</div>
+      <h3>Quizzes</h3>
+      <p>Short quizzes — teacher-graded or student-graded — used to guide instruction, not as high-stakes grades. Frequency matters more than length.</p>
+      <span class="card-tag">quick</span>
+    </div>
+
+    <div class="card" data-cat="quick" data-num="22">
+      <div class="card-num">22</div>
+      <h3>My Favorite No</h3>
+      <p>Students work a warm-up problem on index cards. Sort into yes/no piles; choose your favorite "no" response and analyze it as a class. Normalizes mistakes.</p>
+      <span class="card-tag">quick</span>
+    </div>
+
+    <div class="card" data-cat="quick" data-num="23">
+      <div class="card-num">23</div>
+      <h3>Mini-Whiteboards</h3>
+      <p>Each student (or group) uses a mini-whiteboard to show work. You can scan the room or have students hold up boards simultaneously.</p>
+      <span class="card-tag">quick</span>
+    </div>
+
+    <div class="card" data-cat="quick" data-num="24">
+      <div class="card-num">24</div>
+      <h3>Hand in, Pass Out</h3>
+      <p>Students answer anonymously on paper, hand in, teacher redistributes randomly for peer grading, then polls the class informally on results.</p>
+      <span class="card-tag">quick</span>
+    </div>
+
+  </div>
+
+  <!-- SECTION 3: VISUAL/CREATIVE -->
+  <div class="section-head">
+    <h2>Visual &amp; Creative Strategies</h2>
+    <span class="section-pill pill-purple">Show What You Know</span>
+  </div>
+  <div class="card-grid">
+
+    <div class="card" data-cat="visual" data-num="25">
+      <div class="card-num">25</div>
+      <h3>Doodle It</h3>
+      <p>Students draw what they understand instead of writing it. Great for visual learners and concepts that lend themselves to diagrams or sequences.</p>
+      <span class="card-tag">visual</span>
+    </div>
+
+    <div class="card" data-cat="visual" data-num="26">
+      <div class="card-num">26</div>
+      <h3>Visualize / Be the Illustrator</h3>
+      <p>Read a page without showing the illustration. Students create their own visualization for that page, then compare with the actual image.</p>
+      <span class="card-tag">visual</span>
+    </div>
+
+    <div class="card" data-cat="visual" data-num="27">
+      <div class="card-num">27</div>
+      <h3>Venn Diagram</h3>
+      <p>Students compare and contrast two concepts, events, characters, or ideas using a Venn diagram. Reveals depth of understanding in their overlaps and differences.</p>
+      <span class="card-tag">visual</span>
+    </div>
+
+    <div class="card" data-cat="visual" data-num="28">
+      <div class="card-num">28</div>
+      <h3>Extension Projects</h3>
+      <p>Creative demonstrations: dioramas, posters, collages, ABC books, or any student-generated project that shows additional understanding of a concept.</p>
+      <span class="card-tag">visual</span>
+    </div>
+
+    <div class="card" data-cat="visual" data-num="29">
+      <div class="card-num">29</div>
+      <h3>Photos to Assess Learning</h3>
+      <p>Choose 2–3 photos representing a process. Students write captions for each, followed by a short summary connecting them.</p>
+      <span class="card-tag">visual</span>
+    </div>
+
+    <div class="card" data-cat="visual" data-num="30">
+      <div class="card-num">30</div>
+      <h3>Create a Video</h3>
+      <p>Students make short videos or screencasts explaining their reasoning. Watch what they include, omit, and where they stumble to identify gaps.</p>
+      <span class="card-tag">visual</span>
+    </div>
+
+    <div class="card" data-cat="visual" data-num="31">
+      <div class="card-num">31</div>
+      <h3>Create Something</h3>
+      <p>Similar to checking for transfer — have students build or make something that requires applying what they've learned. Process reveals understanding.</p>
+      <span class="card-tag">visual</span>
+    </div>
+
+    <div class="card" data-cat="visual" data-num="32">
+      <div class="card-num">32</div>
+      <h3>Check for Transfer</h3>
+      <p>Can students apply a concept across contexts? For example: identify climax in a short story, a novel, a movie, and an advertisement.</p>
+      <span class="card-tag">visual</span>
+    </div>
+
+    <div class="card" data-cat="visual" data-num="33">
+      <div class="card-num">33</div>
+      <h3>Chalkboard Splash</h3>
+      <p>Multiple students respond to a prompt on the board simultaneously. Produces a real-time display of collective understanding (or misconceptions).</p>
+      <span class="card-tag">visual</span>
+    </div>
+
+  </div>
+
+  <!-- SECTION 4: VERBAL/DISCUSSION -->
+  <div class="section-head">
+    <h2>Verbal &amp; Discussion Strategies</h2>
+    <span class="section-pill pill-blue">Think Aloud</span>
+  </div>
+  <div class="card-grid">
+
+    <div class="card" data-cat="verbal" data-num="34">
+      <div class="card-num">34</div>
+      <h3>Talk to Each Other</h3>
+      <p>Students discuss how they'd accomplish a task or explain an idea. You circulate and listen in — what you overhear shapes your next instructional move.</p>
+      <span class="card-tag">verbal</span>
+    </div>
+
+    <div class="card" data-cat="verbal" data-num="35">
+      <div class="card-num">35</div>
+      <h3>Think-Pair-Share</h3>
+      <p>Students think individually about a question, pair with a neighbor to discuss, then share with the class. Used with Mazur's ConcepTest for maximum impact.</p>
+      <span class="card-tag">verbal</span>
+    </div>
+
+    <div class="card" data-cat="verbal" data-num="36">
+      <div class="card-num">36</div>
+      <h3>Listening</h3>
+      <p>Ask students to explain how they know something is true. Listen for misconceptions beneath the surface of an answer that sounds correct.</p>
+      <span class="card-tag">verbal</span>
+    </div>
+
+    <div class="card" data-cat="verbal" data-num="37">
+      <div class="card-num">37</div>
+      <h3>Ask Clarifying Questions</h3>
+      <p>Probe student thinking with follow-up questions. Record observations on an anticipation template to spot patterns across the class.</p>
+      <span class="card-tag">verbal</span>
+    </div>
+
+    <div class="card" data-cat="verbal" data-num="38">
+      <div class="card-num">38</div>
+      <h3>Text Rendering</h3>
+      <p>Students read a text, then each share a sentence → phrase → single word they found most significant. Groups compare which words and phrases bubbled up.</p>
+      <span class="card-tag">verbal</span>
+    </div>
+
+    <div class="card" data-cat="verbal" data-num="39">
+      <div class="card-num">39</div>
+      <h3>Running Records</h3>
+      <p>Assess students reading aloud, tracking what they do and what mistakes they make (including self-corrections). Valuable for reading development insight.</p>
+      <span class="card-tag">verbal</span>
+    </div>
+
+    <div class="card" data-cat="verbal" data-num="40">
+      <div class="card-num">40</div>
+      <h3>Anticipate Responses</h3>
+      <p>Before class: do the work yourself in 2+ ways and anticipate student responses. During class: circulate and record observations on a template.</p>
+      <span class="card-tag">verbal</span>
+    </div>
+
+  </div>
+
+  <!-- SECTION 5: PEER-BASED -->
+  <div class="section-head">
+    <h2>Peer-Based Strategies</h2>
+    <span class="section-pill pill-green">Learn Together</span>
+  </div>
+  <div class="card-grid">
+
+    <div class="card" data-cat="peer" data-num="41">
+      <div class="card-num">41</div>
+      <h3>Partner Quizzes</h3>
+      <p>Students work on the first question together, give each other feedback, then work independently on a new question covering the same concept.</p>
+      <span class="card-tag">peer</span>
+    </div>
+
+    <div class="card" data-cat="peer" data-num="42">
+      <div class="card-num">42</div>
+      <h3>Jigsaw Groups</h3>
+      <p>Groups become experts on different text sections, then regroup so each new group has one expert per section. Experts share; everyone synthesizes.</p>
+      <span class="card-tag">peer</span>
+    </div>
+
+    <div class="card" data-cat="peer" data-num="43">
+      <div class="card-num">43</div>
+      <h3>Teach Younger Kids</h3>
+      <p>Students tutor younger students in basic concepts. Check in with both groups afterward — the quality of tutoring reveals how solidly older students understand the material.</p>
+      <span class="card-tag">peer</span>
+    </div>
+
+    <div class="card" data-cat="peer" data-num="44">
+      <div class="card-num">44</div>
+      <h3>Hand Thermometer</h3>
+      <p>After a student shares work, classmates raise hands to varying heights to give peer feedback: all the way up = excellent; half = okay; just above desk = needs work.</p>
+      <span class="card-tag">peer</span>
+    </div>
+
+    <div class="card" data-cat="peer" data-num="45">
+      <div class="card-num">45</div>
+      <h3>Rotate Groups / Stations</h3>
+      <p>Students rotate through activity stations. In small groups, the teacher assesses and gives feedback — higher-quality interactions than whole-class formats allow.</p>
+      <span class="card-tag">peer</span>
+    </div>
+
+    <div class="card" data-cat="peer" data-num="46">
+      <div class="card-num">46</div>
+      <h3>Crowd-Source a Presentation</h3>
+      <p>Students create a shared presentation (like this one) and open it to their learning network for edits. Feedback from peers and teachers becomes the formative data.</p>
+      <span class="card-tag">peer</span>
+    </div>
+
+  </div>
+
+  <!-- SECTION 6: DIGITAL -->
+  <div class="section-head">
+    <h2>Digital &amp; Technology Strategies</h2>
+    <span class="section-pill pill-blue">⚡ Digital Tools</span>
+  </div>
+  <div class="card-grid">
+
+    <div class="card" data-cat="digital" data-num="47">
+      <div class="card-num">47</div>
+      <h3>Google Forms</h3>
+      <p>Pose lesson questions in a Google Form. Students who don't participate verbally will often respond digitally. Anonymous options increase honesty.</p>
+      <span class="card-tag digital">digital</span>
+    </div>
+
+    <div class="card" data-cat="digital" data-num="48">
+      <div class="card-num">48</div>
+      <h3>Clickers / Student Response Systems</h3>
+      <p>Students respond individually to questions using clickers or services like Kahoot!, Poll Everywhere, or Mentimeter. Instant whole-class data.</p>
+      <span class="card-tag digital">digital</span>
+    </div>
+
+    <div class="card" data-cat="digital" data-num="49">
+      <div class="card-num">49</div>
+      <h3>Socrative</h3>
+      <p>Students log into your virtual classroom and respond to pre-posted or on-the-spot questions. Real-time data shows individual and class results. (socrative.com)</p>
+      <span class="card-tag digital">digital</span>
+    </div>
+
+    <div class="card" data-cat="digital" data-num="50">
+      <div class="card-num">50</div>
+      <h3>Poll Everywhere</h3>
+      <p>Live polling students can respond to from any device — phone, laptop, or tablet. Results display visually in real time on your projected screen. (polleverywhere.com)</p>
+      <span class="card-tag digital">digital</span>
+    </div>
+
+    <div class="card" data-cat="digital" data-num="51">
+      <div class="card-num">51</div>
+      <h3>Google Docs (Live Feedback)</h3>
+      <p>Have students write in Google Docs. You or a peer observes their writing in real time and gives live comments — immediate feedback without collecting papers.</p>
+      <span class="card-tag digital">digital</span>
+    </div>
+
+    <div class="card" data-cat="digital" data-num="52">
+      <div class="card-num">52</div>
+      <h3>Back Channel (Padlet / Jamboard)</h3>
+      <p>As you teach, students post ideas, questions, and comments to a digital board. Captures quiet students' thinking and lets you address misconceptions mid-lesson.</p>
+      <span class="card-tag digital">digital</span>
+    </div>
+
+    <div class="card" data-cat="digital" data-num="53">
+      <div class="card-num">53</div>
+      <h3>Digital Cork Board (Padlet)</h3>
+      <p>Students collaboratively post closing thoughts, questions, and comments on a shared digital board. Padlet replaced the discontinued Linoit. (padlet.com)</p>
+      <span class="card-tag digital">digital</span>
+    </div>
+
+    <div class="card" data-cat="digital" data-num="54">
+      <div class="card-num">54</div>
+      <h3>Nearpod / Pear Deck</h3>
+      <p>Interactive slides where students respond to embedded questions, drawings, or polls as you present. Every student response is visible in real time to the teacher.</p>
+      <span class="card-tag digital">digital</span>
+    </div>
+
+    <div class="card" data-cat="digital" data-num="55">
+      <div class="card-num">55</div>
+      <h3>Flipgrid / Flip</h3>
+      <p>Students record short video responses to prompts. Teacher and peers can view and respond. Great for checking understanding and building communication skills. (flip.com)</p>
+      <span class="card-tag digital">digital</span>
+    </div>
+
+    <div class="card" data-cat="digital" data-num="56">
+      <div class="card-num">56</div>
+      <h3>Kahoot! / Gimkit / Blooket</h3>
+      <p>Game-based quiz platforms that generate engagement alongside data. Use results to identify concepts needing reteaching — not to produce grades.</p>
+      <span class="card-tag digital">digital</span>
+    </div>
+
+  </div>
+
+  <!-- DIGITAL TOOLS SPOTLIGHT -->
+  <div class="tools-section">
+    <h2>🔧 Digital Tools — Current Status &amp; Links</h2>
+    <p class="sub">The original 2012 resource referenced some tools that have since changed. Here's an updated reference for 2025–26.</p>
+    <div class="tools-grid">
+      <div class="tool-card">
+        <div class="tool-name">Poll Everywhere</div>
+        <div class="tool-url">polleverywhere.com</div>
+        <div class="tool-desc">Live polling; students respond from any device. Free tier available for educators.</div>
+        <span class="tool-status status-active">✓ Active</span>
+      </div>
+      <div class="tool-card">
+        <div class="tool-name">Padlet</div>
+        <div class="tool-url">padlet.com</div>
+        <div class="tool-desc">Replaces Linoit for digital cork boards. Collaborative posting, easy to set up.</div>
+        <span class="tool-status status-active">✓ Active</span>
+      </div>
+      <div class="tool-card">
+        <div class="tool-name">Socrative</div>
+        <div class="tool-url">socrative.com</div>
+        <div class="tool-desc">Teacher-created quizzes and polls with real-time student data dashboards.</div>
+        <span class="tool-status status-active">✓ Active</span>
+      </div>
+      <div class="tool-card">
+        <div class="tool-name">Nearpod</div>
+        <div class="tool-url">nearpod.com</div>
+        <div class="tool-desc">Interactive presentations with embedded formative checks. Excellent for remote and in-person.</div>
+        <span class="tool-status status-active">✓ Active</span>
+      </div>
+      <div class="tool-card">
+        <div class="tool-name">Flip (was Flipgrid)</div>
+        <div class="tool-url">flip.com</div>
+        <div class="tool-desc">Student video responses to prompts. Free for educators. Rebranded from Flipgrid in 2022.</div>
+        <span class="tool-status status-active">✓ Active</span>
+      </div>
+      <div class="tool-card">
+        <div class="tool-name">Kahoot!</div>
+        <div class="tool-url">kahoot.com</div>
+        <div class="tool-desc">Game-based quizzing. Widely known, easy for students. Use results for instructional decisions.</div>
+        <span class="tool-status status-active">✓ Active</span>
+      </div>
+      <div class="tool-card">
+        <div class="tool-name">Flubaroo</div>
+        <div class="tool-url">flubaroo.com</div>
+        <div class="tool-desc">Google Sheets add-on for auto-grading Google Forms quizzes. Original resource recommended this.</div>
+        <span class="tool-status status-note">⚠ Discontinued — use Google Forms Quizzes built-in grading instead</span>
+      </div>
+      <div class="tool-card">
+        <div class="tool-name">TodaysMeet / Wifitti</div>
+        <div class="tool-url">—</div>
+        <div class="tool-desc">Both platforms from the original resource are now closed. Use Padlet or Google Classroom's question stream instead.</div>
+        <span class="tool-status status-note">⚠ Discontinued — use Padlet</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- USAGE GUIDE -->
+  <div class="usage-section">
+    <h2>📋 How to Use This Resource in D295</h2>
+    <div class="usage-grid">
+      <div class="usage-item">
+        <strong>For Any Subject</strong>
+        All 56 strategies are subject-agnostic. Every discipline can use writing, quick checks, and discussion strategies.
+      </div>
+      <div class="usage-item">
+        <strong>Low-Tech Settings</strong>
+        Strategies 01–46 require no technology. Many need only paper, index cards, or whiteboards.
+      </div>
+      <div class="usage-item">
+        <strong>High-Tech Settings</strong>
+        Strategies 47–56 leverage digital tools. Most have free educator tiers or district licensing.
+      </div>
+      <div class="usage-item">
+        <strong>Not for Grading</strong>
+        Every strategy here is formative — use them to inform your teaching, not to calculate student grades.
+      </div>
+      <div class="usage-item">
+        <strong>Start Small</strong>
+        Pick two or three strategies from different categories and test them before expanding your repertoire.
+      </div>
+      <div class="usage-item">
+        <strong>CC License</strong>
+        Original content by David Wees is CC BY-NC-SA. This updated version carries the same license.
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <p>Originally curated by <strong>David Wees</strong>, Formative Assessment Specialist, New Visions for Public Schools (2012) &nbsp;·&nbsp; Updated for D295, 2025–26.</p>
+  <p style="margin-top:0.5rem;">Licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">Creative Commons Attribution-NonCommercial-ShareAlike 4.0</a>. You may copy, use, share, and modify with attribution for non-commercial purposes.</p>
+  <p style="margin-top:0.5rem; font-size:0.75rem; color:#9ca3af;">Original source PDF archived at: azed.gov · otffeo.on.ca · wdt.edu</p>
+</footer>
+
+<script>
+  let activeFilter = 'all';
+
+  function setFilter(cat, btn) {
+    activeFilter = cat;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    filterCards();
+  }
+
+  function filterCards() {
+    const query = document.getElementById('searchInput').value.toLowerCase();
+    const cards = document.querySelectorAll('.card');
+    let count = 0;
+
+    cards.forEach(card => {
+      const catMatch = activeFilter === 'all' || card.dataset.cat === activeFilter;
+      const text = card.textContent.toLowerCase();
+      const queryMatch = !query || text.includes(query);
+      const show = catMatch && queryMatch;
+      card.classList.toggle('hidden', !show);
+      if (show) count++;
+    });
+
+    document.getElementById('countBadge').textContent = count + ' showing';
+  }
+</script>
+
+</body>
+</html>
